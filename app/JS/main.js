@@ -1,10 +1,10 @@
 import "../CSS/style.css";
+var name = "cheetah";
+const url = "https://api.api-ninjas.com/v1/animals?name=" + name;
 async function getData() {
   try {
     //fetch returns a promise
-    const response = await fetch(
-      "https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists"
-    );
+    const response = await fetch(url);
 
     //gaurd clause
     if (response.status != 200) {
