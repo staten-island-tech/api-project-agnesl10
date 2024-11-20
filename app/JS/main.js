@@ -1,6 +1,7 @@
 import "../CSS/style.css";
 var name = "cheetah";
-const url = "https://api.api-ninjas.com/v1/animals?name=" + name;
+const url =
+  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=DEMO_KEY";
 async function getData() {
   try {
     //fetch returns a promise
