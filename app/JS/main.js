@@ -1,9 +1,7 @@
 import "../CSS/style.css";
 import { DOMSelectors } from "./dom";
 
-const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=1XsDU4HLtoxseyqbYBNzwYI4CePooggYmlOoWcmC"
-)}`;
+const url = `https://valorant-api.com/v1/agents`;
 async function getData() {
   try {
     //fetch returns a promise
@@ -14,7 +12,9 @@ async function getData() {
       throw new Error(response);
     } else {
       const data = await response.json();
-      document.querySelector("h1").textContent = data.name;
+      console.log(data.data);
+      insertData(agents);
+      const agents = data.data.filter(isPlayableCharacter === true);
     }
   } catch (error) {
     console.log(error);
@@ -24,26 +24,16 @@ async function getData() {
 
 getData();
 
-const response = await fetch(
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=1XsDU4HLtoxseyqbYBNzwYI4CePooggYmlOoWcmC"
-);
-
-const data = await response.json();
-
-console.log(data);
-
-function insertData(data) {
-  const apidata = data.photos;
-  apidata.forEach((pic) =>
+function insertData(agents) {
+  data.forEach((a) =>
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
       `<div class="card w-1/5 ">
-        <h2 class="title">${pic.rover.name}</h2>
-        <img class="image" src="${pic.img_src}" alt="" />
-        <h4 class="camera">${pic.camera.name}</h4>
+        <h2 class="title">${a.data.displayName}</h2>
+        <img class="image" src="${a.data.fullProfile}" alt="" />
+        <h3 class="role">${a.role.displayName}</h3>
+        <h3 class="desc">${a.data.description}</h3>
       </div>`
     )
   );
 }
-
-insertData(data);
