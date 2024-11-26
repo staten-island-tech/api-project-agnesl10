@@ -2,7 +2,7 @@ import "../CSS/style.css";
 import { DOMSelectors } from "./dom";
 
 const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=q8ohbspClgWN7RKnZobtYvhilvJg0LfgNlnke8c4"
+  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=1XsDU4HLtoxseyqbYBNzwYI4CePooggYmlOoWcmC"
 )}`;
 async function getData() {
   try {
@@ -25,7 +25,7 @@ async function getData() {
 getData();
 
 const response = await fetch(
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=q8ohbspClgWN7RKnZobtYvhi1vJg0LfgNlnke8c4"
+  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=1XsDU4HLtoxseyqbYBNzwYI4CePooggYmlOoWcmC"
 );
 
 const data = await response.json();
@@ -33,15 +33,17 @@ const data = await response.json();
 console.log(data);
 
 function insertData(data) {
-  const apidata = photos.data;
+  const apidata = data.photos;
   apidata.forEach((pic) =>
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
-      `<div class="card">
-        <h2 class="title">${pic.name}</h2>
-        <img class="image" src="" alt="" />
-        <h4 class="camera"></h4>
+      `<div class="card w-1/5 ">
+        <h2 class="title">${pic.rover.name}</h2>
+        <img class="image" src="${pic.img_src}" alt="" />
+        <h4 class="camera">${pic.camera.name}</h4>
       </div>`
     )
   );
 }
+
+insertData(data);
