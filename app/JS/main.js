@@ -6,15 +6,16 @@ async function getData() {
   try {
     //fetch returns a promise
     const response = await fetch(url);
-
     //gaurd clause
     if (response.status != 200) {
       throw new Error(response);
     } else {
       const data = await response.json();
-      console.log(data.data);
+      const agents = data.data.filter(
+        (data) => data.isPlayableCharacter === true
+      );
+      console.log(agents);
       insertData(agents);
-      const agents = data.data.filter(isPlayableCharacter === true);
     }
   } catch (error) {
     console.log(error);
@@ -25,14 +26,14 @@ async function getData() {
 getData();
 
 function insertData(agents) {
-  data.forEach((a) =>
+  agents.forEach((agent) =>
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
-      `<div class="card w-1/5 ">
-        <h2 class="title">${a.data.displayName}</h2>
-        <img class="image" src="${a.data.fullProfile}" alt="" />
-        <h3 class="role">${a.role.displayName}</h3>
-        <h3 class="desc">${a.data.description}</h3>
+      `<div class="card w-1/5 h-3/5 p-2.5 m-5 bg-[#c8c4b1] text-[#3e362e] rounded-s-lg flex flex-col overflow-hidden justify-around">
+        <h2 class="title">${agent.displayName}</h2>
+        <img class="image " src="${agent.fullPortrait}" alt="" />
+        <h3 class="role">${agent.role.displayName}</h3>
+        <h3 class="desc">${agent.description}</h3>
       </div>`
     )
   );
