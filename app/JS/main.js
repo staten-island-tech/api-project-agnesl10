@@ -29,7 +29,7 @@ function insertData(agents) {
   agents.forEach((agent) =>
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
-      `<div class="card w-1/5 h-3/5 p-2.5 m-5 bg-[#c8c4b1] text-[#3e362e] rounded-s-lg flex flex-col overflow-hidden justify-around">
+      `<div class="card w-4/5 h-5/5 p-2.5 m-5 bg-red-400 text-amber-950 rounded-s-lg flex flex-col overflow-hidden justify-around">
         <h2 class="title">${agent.displayName}</h2>
         <img class="image " src="${agent.fullPortrait}" alt="" />
         <h3 class="role">${agent.role.displayName}</h3>
