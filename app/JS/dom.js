@@ -3,6 +3,7 @@ const DOMSelectors = {
   card: document.querySelector(".card"),
   title: document.querySelector(".title"),
   image: document.querySelector(".role"),
-  button: document.querySelector(".btn"),
+  button1: document.querySelector(".agents"),
+  button2: document.querySelector(".guns"),
 };
 export { DOMSelectors };

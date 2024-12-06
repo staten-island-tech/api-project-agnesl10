@@ -53,7 +53,8 @@ body,
     font-size: 30%;
   }
 }
-h1 {
+h1,
+button {
   font-family: "VALORANT", sans-serif;
 }
 /* body {
