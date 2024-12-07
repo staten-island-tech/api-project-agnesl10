@@ -68,3 +68,8 @@ button {
   scale: 1.1;
   transition: all 0.3s;
 }
+.title{
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

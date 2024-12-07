@@ -2,7 +2,11 @@ import "../CSS/style.css";
 import { DOMSelectors } from "./dom";
 
 const agenturl = `https://valorant-api.com/v1/agents`;
-const gunurl = `https://valorant-api.com/v1/weapons`;
+const spraysurl = `https://valorant-api.com/v1/sprays`;
+
+function clearPage() {
+  DOMSelectors.container.innerHTML = "";
+}
 
 async function getAgents() {
   try {
@@ -33,7 +37,7 @@ function insertData(agents) {
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
       `<div class="card w-2/6 h-3/6 p-2.5 m-5 mx-0.5 bg-red-400 text-amber-950 rounded-s-lg flex flex-col overflow-hidden justify-around items-center">
-        <h2 class="title text-2xl">${agent.displayName}</h2>
+        <h2 class="title text-4xl">${agent.displayName}</h2>
         <h3 class="role text-base">${agent.role.displayName}</h3>
         <img class="image" src="${agent.fullPortrait}" alt="" />
         <h3 class="desc text-base">${agent.description}</h3>
@@ -44,22 +48,24 @@ function insertData(agents) {
 }
 
 DOMSelectors.button1.addEventListener("click", function () {
-  DOMSelectors.container.innerHTML = "";
+  clearPage();
   getAgents();
 });
 
-async function getGuns() {
+async function getSprays() {
   try {
     //fetch returns a promise
-    const response = await fetch(gunurl);
+    const response = await fetch(spraysurl);
     //gaurd clause
     if (response.status != 200) {
       throw new Error(response);
     } else {
-      const gunData = await response.json();
+      const spraysData = await response.json();
+      const sprays = spraysData.data
+
       // const guns = data.data.filter((gun) => data.isPlayableCharacter === true);
-      console.log(gunData);
-      insertGuns([gunData]);
+      console.log(sprays);
+      insertSprays(sprays);
     }
   } catch (error) {
     console.log(error);
@@ -67,22 +73,23 @@ async function getGuns() {
   }
 }
 
-getGuns();
+getSprays();
 
-function insertGuns(gunData) {
-  gunData.forEach((gun) =>
+function insertSprays(sprays) {
+  sprays.forEach((spray) =>
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
       `<div class="card w-2/6 h-3/6 p-2.5 m-5 mx-0.5 bg-red-400 text-amber-950 rounded-s-lg flex flex-col overflow-hidden justify-around items-center">
-    <h2 class="title text-2xl">${gun.displayName}</h2>
-    <img class="image" src="${gun.displayIcon}" alt="" />
-    <br />
-    </div>`
+      <h2 class="title text-4xl m-5">${spray.displayName}</h2>
+      <img class="image border-r-5" src="${spray.displayIcon}" alt="" />
+      <br />
+      </div>`
     )
   );
 }
 
 DOMSelectors.button2.addEventListener("click", function () {
   DOMSelectors.container.innerHTML = "";
-  getGuns();
+  clearPage();
+  getSprays();
 });
